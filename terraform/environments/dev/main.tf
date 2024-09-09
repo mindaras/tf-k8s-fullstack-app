@@ -21,7 +21,7 @@ module "vpc" {
     "${local.name_prefix}-public-subnet-${index + 1}"
   ]
 
-  enable_nat_gateway = false
+  enable_nat_gateway      = false
   map_public_ip_on_launch = true
 
   tags = local.common_tags

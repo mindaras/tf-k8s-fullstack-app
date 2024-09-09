@@ -43,5 +43,5 @@ export AWS_PROFILE=<profile name>
 _Apply configuration_
 
 ```
-terraform apply -var="aws_user=<user id>"
+terraform apply -var="ci_user_id=<user id> -var="ci_username=<username>"
 ```

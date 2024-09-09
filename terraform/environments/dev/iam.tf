@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "eks_profile_access_assume_role_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.ci_user}:root"]
+      identifiers = ["arn:aws:iam::${var.ci_user_id}:user/${var.ci_username}"]
     }
   }
 }

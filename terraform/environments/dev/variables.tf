@@ -16,7 +16,12 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "ci_user" {
+variable "ci_user_id" {
   type        = string
   description = "(Required) Id of AWS CI user."
+}
+
+variable "ci_username" {
+  type        = string
+  description = "(Required) Name of AWS CI user."
 }
