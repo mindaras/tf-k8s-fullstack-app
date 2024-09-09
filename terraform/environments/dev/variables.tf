@@ -18,10 +18,10 @@ variable "vpc_cidr" {
 
 variable "ci_user_id" {
   type        = string
-  description = "(Required) Id of AWS CI user."
+  description = "(Required) AWS user id."
 }
 
-variable "ci_username" {
+variable "ci_user_name" {
   type        = string
-  description = "(Required) Name of AWS CI user."
+  description = "(Required) AWS user name."
 }
