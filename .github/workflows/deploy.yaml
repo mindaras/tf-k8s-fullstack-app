@@ -1,4 +1,4 @@
-name: AWS EKS Cluster Resources
+name: DEV - AWS EKS Cluster Resources
 
 on:
   push:
@@ -29,5 +29,5 @@ jobs:
 
       - name: List EKS cluster resources
         run: |
-          aws eks update-kubeconfig --name <cluster-name> --region <region>
+          aws eks update-kubeconfig --name counter-app-development-eks-cluster --region ${{ secrets.AWS_REGION }}
           kubectl get all
