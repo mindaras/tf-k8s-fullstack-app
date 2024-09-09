@@ -25,13 +25,19 @@ jobs:
         run: |
           echo "CPU Architecture: $(uname -m)"
 
-      # - name: Install AWS CLI
-      #   run: |
-      #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-      #     unzip awscliv2.zip
-      #     sudo ./aws/install
+      - name: Install AWS CLI
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
 
-      # - name: List EKS cluster resources
-      #   run: |
-      #     aws eks update-kubeconfig --name <cluster-name> --region <region>
-      #     kubectl get all
+      - name: Install Kubernetes CLI
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: List EKS cluster resources
+        run: |
+          aws eks update-kubeconfig --name <cluster-name> --region <region>
+          kubectl get all
