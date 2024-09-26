@@ -1,4 +1,4 @@
-name: DEV - Check connection
+name: DEV - Check cluster connection
 
 on:
   workflow_dispatch:
