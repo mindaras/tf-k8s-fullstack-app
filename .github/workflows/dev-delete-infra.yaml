@@ -3,10 +3,6 @@ name: DEV - Deploy infrastructure
 on:
   workflow_dispatch:
 
-  push:
-    paths:
-      - "terraform/environments/dev/**"
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
