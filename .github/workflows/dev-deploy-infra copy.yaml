@@ -1,4 +1,4 @@
-name: DEV - Deploy infrastructure
+name: DEV - Destroy infrastructure
 
 on:
   workflow_dispatch:
@@ -30,5 +30,5 @@ jobs:
         working-directory: terraform/environments/dev
 
       - name: Terraform Apply
-        run: terraform plan -var="ci_user_id=${{ secrets.AWS_USER_ID }}" -var="ci_user_name=${{ secrets.AWS_USER_NAME }}"
+        run: terraform destroy -var="ci_user_id=${{ secrets.AWS_USER_ID }}" -var="ci_user_name=${{ secrets.AWS_USER_NAME }}" -auto-approve
         working-directory: terraform/environments/dev
