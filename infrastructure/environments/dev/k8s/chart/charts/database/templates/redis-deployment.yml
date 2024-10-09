@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "database.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "database.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "database.fullname" . }}
+    spec:
+      volumes:
+        - name: {{ include "database.fullname" . }}-volume
+          persistentVolumeClaim:
+            claimName: {{ include "database.fullname" . }}-pvc
+      containers:
+        - image: redis:latest
+          name: {{ include "database.fullname" . }}
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "backend.fullname" . }}-secret
+                  key: password
+          args: ["--requirepass", "$(PASSWORD)"]
+          ports:
+              - containerPort: 6379
+          volumeMounts:
+            - name: {{ include "database.fullname" . }}-volume
+              mountPath: /data
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "redis-cli -a $PASSWORD ping | grep PONG"
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "redis-cli -a $PASSWORD ping | grep PONG"
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+     

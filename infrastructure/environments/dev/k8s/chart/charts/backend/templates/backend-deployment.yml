@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backend.fullname" . }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ include "backend.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "backend.fullname" . }}
+    spec:
+      containers:
+        - image: mindaras/{{ .Release.Name }}-counter-backend:latest
+          imagePullPolicy: Always
+          name: {{ include "backend.fullname" . }}
+          env:
+            - name: CACHE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-database-secret
+                  key: user
+            - name: CACHE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-database-secret
+                  key: password
+            - name: CACHE_HOST
+              value: {{ .Release.Name }}-database
+            - name: CACHE_PORT
+              value: "{{ .Values.database.port }}"
+          ports:
+            - containerPort: {{ .Values.port }}
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "400m"
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthEndpoint }}
+              port: {{ .Values.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthEndpoint }}
+              port: {{ .Values.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

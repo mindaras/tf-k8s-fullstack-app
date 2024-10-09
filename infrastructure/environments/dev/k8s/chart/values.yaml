@@ -1,0 +1,28 @@
+frontend:
+  replicas: 1
+  port: 3000
+  service:
+    port: 3000
+
+backend:
+  replicas: 1
+  port: 8000
+  healthEndpoint: /ping
+  service:
+    port: 8000
+  database:
+    port: 6379
+
+database:
+  user: default
+  password: mysecretpassword
+  service:
+    port: 6379
+  volume:
+    storage: 100Mi
+
+ingress:
+  frontend:
+    port: 3000
+  backend:
+    port: 8000

@@ -23,8 +23,8 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
-        working-directory: terraform/environments/dev
+        working-directory: infrastructure/environments/dev/terraform
 
       - name: Destroy resources
         run: terraform destroy -var="ci_user_id=${{ secrets.AWS_USER_ID }}" -var="ci_user_name=${{ secrets.AWS_USER_NAME }}" -auto-approve
-        working-directory: terraform/environments/dev
+        working-directory: infrastructure/environments/dev/terraform
