@@ -1,4 +1,4 @@
-name: DEV - Publish Backend Image
+name: DEV - Build Frontend
 
 on:
   workflow_dispatch:
@@ -19,8 +19,8 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Build Docker Image
-        run: docker build --platform linux/amd64 -t dev-counter-backend .
-        working-directory: apps/backend
+        run: docker build --platform linux/amd64 --build-arg="VITE_API_URL=http://dev.api.mindaugasl.com/api" -t dev-counter-frontend .
+        working-directory: apps/frontend
 
       - name: Log in to ECR Registry
         run: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 009160063900.dkr.ecr.eu-central-1.amazonaws.com
