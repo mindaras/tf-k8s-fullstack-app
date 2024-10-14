@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - image: {{ .Release.Name }}-counter-frontend:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: {{ include "frontend.fullname" . }}
           ports:
             - containerPort: {{ .Values.port }}

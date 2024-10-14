@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - image: {{ .Release.Name }}-counter-backend:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: {{ include "backend.fullname" . }}
           env:
             - name: CACHE_USER
