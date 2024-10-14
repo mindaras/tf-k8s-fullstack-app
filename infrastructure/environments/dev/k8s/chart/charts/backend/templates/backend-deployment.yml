@@ -12,8 +12,10 @@ spec:
       labels:
         app: {{ include "backend.fullname" . }}
     spec:
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-ecr-secret
       containers:
-        - image: {{ .Release.Name }}-counter-backend:latest
+        - image: {{ .Values.aws.userId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/counter-app:{{ .Release.Name }}-backend-latest
           imagePullPolicy: Always
           name: {{ include "backend.fullname" . }}
           env:

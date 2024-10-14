@@ -12,8 +12,10 @@ spec:
       labels:
         app: {{ include "frontend.fullname" . }}
     spec:
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-ecr-secret
       containers:
-        - image: {{ .Release.Name }}-counter-frontend:latest
+        - image: {{ .Values.aws.userId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/counter-app:{{ .Release.Name }}-frontend-latest
           imagePullPolicy: Always
           name: {{ include "frontend.fullname" . }}
           ports:

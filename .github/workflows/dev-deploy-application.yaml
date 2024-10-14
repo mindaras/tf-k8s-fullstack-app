@@ -36,4 +36,8 @@ jobs:
 
       - name: Deploy Application
         working-directory: infrastructure/environments/dev/k8s
-        run: helm install dev chart
+        run: |
+          helm install dev chart \
+          --set aws.accountId=${{ secrets.AWS_USER_ID }} \
+          --set aws.region=${{ secrets.AWS_REGION }} \
+          --set aws.ecrPassword=$(aws ecr get-login-password --region ${{ secrets.AWS_REGION }})
