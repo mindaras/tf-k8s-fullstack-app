@@ -32,5 +32,5 @@ jobs:
           docker tag ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest dev-counter-frontend:latest
 
       - name: Deploy Application
-        working-directory: infrastructure/environments/dev/k8s/chart
-        run: helm install dev ./chart
+        working-directory: infrastructure/environments/dev/k8s
+        run: helm install dev chart
