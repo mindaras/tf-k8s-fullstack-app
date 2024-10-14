@@ -23,7 +23,7 @@ jobs:
         working-directory: apps/frontend
 
       - name: Log in to ECR Registry
-        run: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 009160063900.dkr.ecr.eu-central-1.amazonaws.com
+        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
       - name: Tag Docker Image
         run: docker tag dev-counter-frontend ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest
