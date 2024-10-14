@@ -31,6 +31,10 @@ jobs:
           docker pull ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-backend-latest
           docker tag ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-backend-latest dev-counter-backend:latest
 
-      - name: Deploy Application
+      - name: Check helm version
         working-directory: infrastructure/environments/dev/k8s/chart
-        run: helm install dev chart
+        run: helm version
+
+      # - name: Deploy Application
+      #   working-directory: infrastructure/environments/dev/k8s/chart
+      #   run: helm install dev ./chart
