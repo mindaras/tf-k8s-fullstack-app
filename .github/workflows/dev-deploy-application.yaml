@@ -28,8 +28,8 @@ jobs:
 
       - name: Pull Frontend Image
         run: |
-          docker pull ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-backend-latest
-          docker tag ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-backend-latest dev-counter-backend:latest
+          docker pull ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest
+          docker tag ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest dev-counter-frontend:latest
 
       - name: Check Images
         working-directory: infrastructure/environments/dev/k8s/chart
