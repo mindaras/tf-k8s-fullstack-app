@@ -31,10 +31,6 @@ jobs:
           docker pull ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest
           docker tag ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest dev-counter-frontend:latest
 
-      - name: Check Images
+      - name: Deploy Application
         working-directory: infrastructure/environments/dev/k8s/chart
-        run: docker image ls
-
-      # - name: Deploy Application
-      #   working-directory: infrastructure/environments/dev/k8s/chart
-      #   run: helm install dev ./chart
+        run: helm install dev ./chart
