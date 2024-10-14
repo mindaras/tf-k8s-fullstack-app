@@ -31,7 +31,7 @@ jobs:
           docker pull ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest
           docker tag ${{ secrets.AWS_USER_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/counter-app:dev-frontend-latest dev-counter-frontend:latest
 
-      - name: Add Cluster
+      - name: Add EKS Cluster
         run: aws eks update-kubeconfig --name counter-app-development-eks-cluster --region ${{ secrets.AWS_REGION }}
 
       - name: Deploy Application
