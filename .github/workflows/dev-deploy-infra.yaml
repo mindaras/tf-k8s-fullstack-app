@@ -28,3 +28,17 @@ jobs:
       - name: Create resources
         run: terraform apply -var="ci_user_id=${{ secrets.AWS_USER_ID }}" -var="ci_user_name=${{ secrets.AWS_USER_NAME }}" -auto-approve
         working-directory: infrastructure/environments/dev/terraform
+
+      - name: Install Kubernetes CLI
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+
+      - name: Check Cluster Connection
+        run: |
+          aws eks update-kubeconfig --name counter-app-development-eks-cluster --region ${{ secrets.AWS_REGION }}
+          kubectl get all
+
+      - name: Install Ingress
+        run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.0/deploy/static/provider/cloud/deploy.yaml

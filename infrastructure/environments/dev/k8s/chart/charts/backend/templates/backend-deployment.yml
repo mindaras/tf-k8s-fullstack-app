@@ -13,7 +13,7 @@ spec:
         app: {{ include "backend.fullname" . }}
     spec:
       containers:
-        - image: mindaras/{{ .Release.Name }}-counter-backend:latest
+        - image: {{ .Release.Name }}-counter-backend:latest
           imagePullPolicy: Always
           name: {{ include "backend.fullname" . }}
           env:
