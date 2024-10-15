@@ -1,8 +1,9 @@
-aws:
-  userId: "override"
-  region: "override"
-  ecrPassword: "override"
-  ecrEmail: "email@example.com"
+global:
+  aws:
+    userId: "override"
+    region: "override"
+    ecrPassword: "override"
+    ecrEmail: "email@example.com"
 
 frontend:
   replicas: 1

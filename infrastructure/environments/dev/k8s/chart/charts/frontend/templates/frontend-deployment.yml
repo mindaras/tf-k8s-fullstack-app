@@ -15,7 +15,7 @@ spec:
       imagePullSecrets:
         - name: {{ .Release.Name }}-ecr-secret
       containers:
-        - image: {{ .Values.aws.userId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/counter-app:{{ .Release.Name }}-frontend-latest
+        - image: {{ .Values.global.aws.userId }}.dkr.ecr.{{ .Values.global.aws.region }}.amazonaws.com/counter-app:{{ .Release.Name }}-frontend-latest
           imagePullPolicy: Always
           name: {{ include "frontend.fullname" . }}
           ports:
