@@ -19,6 +19,8 @@ spec:
           imagePullPolicy: Always
           name: {{ include "backend.fullname" . }}
           env:
+            - name: PORT
+              value: "{{ .Values.port }}"
             - name: CACHE_USER
               valueFrom:
                 secretKeyRef:
