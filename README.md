@@ -1,6 +1,6 @@
 # About the project
 
-This is a fullstack application utilizing Terraform for infrastructure provisioning and Kubernetes for container orchestration. The application contains a simple yet sufficient functionality to make use of 3 application layers - frontend, backend, database.
+This is a fullstack application utilizing `Terraform` for infrastructure provisioning and `Kubernetes` for container orchestration. The application contains a simple yet sufficient functionality to make use of 3 application layers - frontend, backend, database.
 
 ## Architecture
 
