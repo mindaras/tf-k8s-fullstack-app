@@ -15,7 +15,7 @@ spec:
                 name: {{ .Release.Name }}-frontend
                 port:
                   number: {{ .Values.frontend.port }}
-    - host: {{ .Release.Name }}.api.mindaugasl.com
+    - host: api.{{ .Release.Name }}.mindaugasl.com
       http:
         paths:
           - path: /

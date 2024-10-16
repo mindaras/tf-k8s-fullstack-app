@@ -13,6 +13,19 @@
           }
         ]
       }
+    },
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "api.dev.mindaugasl.com",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [
+          {
+            "Value": "$ALB_ENDPOINT"
+          }
+        ]
+      }
     }
   ]
 }

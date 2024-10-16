@@ -19,7 +19,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Build Docker Image
-        run: docker build --platform linux/amd64 --build-arg="VITE_API_URL=http://dev.api.mindaugasl.com/api" -t dev-counter-frontend .
+        run: docker build --platform linux/amd64 --build-arg="VITE_API_URL=http://api.dev.mindaugasl.com/api" -t dev-counter-frontend .
         working-directory: apps/frontend
 
       - name: Log in to ECR Registry
