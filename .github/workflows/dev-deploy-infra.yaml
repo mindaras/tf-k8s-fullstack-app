@@ -42,3 +42,19 @@ jobs:
 
       - name: Install Ingress
         run: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.0/deploy/static/provider/cloud/deploy.yaml
+
+      - name: Point Domain to Ingress ALB
+        working-directory: infrastructure/environments/dev/dns
+        run: |
+          ALB_ENDPOINT=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+
+          echo "ALB ENDPOINT: $ALB_ENDPOINT"
+
+          HOSTED_ZONE_ID=$(aws route53 list-hosted-zones --query "HostedZones[?Name=='mindaugasl.com.'].Id" --output text)
+
+          # Replace the ALB_ENDPOINT in cname.json
+          sed -i "s|\$ALB_ENDPOINT|$ALB_ENDPOINT|g" ./cname.json
+
+          aws route53 change-resource-record-sets \
+          --hosted-zone-id $HOSTED_ZONE_ID \
+          --change-batch file://./cname.json

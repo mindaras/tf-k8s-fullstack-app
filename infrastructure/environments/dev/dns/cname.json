@@ -1,0 +1,18 @@
+{
+  "Comment": "Update CNAME record to point to ALB",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "dev.mindaugasl.com",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [
+          {
+            "Value": "$ALB_ENDPOINT"
+          }
+        ]
+      }
+    }
+  ]
+}
