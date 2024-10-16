@@ -17,7 +17,7 @@
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "api.dev.mindaugasl.com",
+        "Name": "dev.api.mindaugasl.com",
         "Type": "CNAME",
         "TTL": 300,
         "ResourceRecords": [
