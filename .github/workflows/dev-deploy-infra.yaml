@@ -46,6 +46,9 @@ jobs:
       - name: Point Domain to Ingress ALB
         working-directory: infrastructure/environments/dev/dns
         run: |
+          echo "Waiting for 1 minute before attempting to retrieve ALB endpoint..."
+          sleep 60
+
           ALB_ENDPOINT=$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
 
           echo "ALB ENDPOINT: $ALB_ENDPOINT"
