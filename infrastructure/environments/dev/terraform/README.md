@@ -45,3 +45,9 @@ _Apply configuration_
 ```
 terraform apply -var="ci_user_id=<user id> -var="ci_user_name=<username>" -auto-approve
 ```
+
+## Troubleshooting
+
+_Failure to delete VPC and subnets_
+
+Check for dangling load balancers and remove them manually through AWS Console as they block deletion of VPC and the subnets
